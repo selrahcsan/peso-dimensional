@@ -1,54 +1,40 @@
-/* main.c
- *
- * Copyright 2025 Charles
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
+/* Calcular o peso dimensional de uma caixa de 12"x10"x8" que é definido como:
 
-#include "config.h"
+Peso dimensional = volume da caixa / 166
 
-#include <glib.h>
-#include <stdlib.h>
+O resultado esperado tem que ser o valor inteiro da operação arredondado para cima.
+Espera-se as dimensões da caixa em polegadas (inteiro).
 
-gint
-main (gint   argc,
-      gchar *argv[])
-{
-	g_autoptr(GOptionContext) context = NULL;
-	g_autoptr(GError) error = NULL;
-	gboolean version = FALSE;
-	GOptionEntry main_entries[] = {
-		{ "version", 0, 0, G_OPTION_ARG_NONE, &version, "Show program version" },
-		{ NULL }
-	};
+Desafios:
 
-	context = g_option_context_new ("- my command line tool");
-	g_option_context_add_main_entries (context, main_entries, NULL);
+ * Pedir ao usuário que insira as dimensões da caixa (comprimento, largura e altura) por meio da entrada do programa.
+Definir como constante o número 166 (que nessa expressão significa polegadas cúbicas por libra).*/
 
-	if (!g_option_context_parse (context, &argc, &argv, &error))
-	{
-		g_printerr ("%s\n", error->message);
-		return EXIT_FAILURE;
-	}
+#include <stdio.h>
+#include <math.h>
 
-	if (version)
-	{
-		g_printerr ("%s\n", PACKAGE_VERSION);
-		return EXIT_SUCCESS;
-	}
+int main(void) {
+    double pesoDimensional;
+    int dimensoesCaixa[3];
+    int volumeTotal = 1;
+    const int polegadasCubicasPorLibra = 166;
 
-	return EXIT_SUCCESS;
+    printf("Digite o comprimento da caixa em polegadas: ");
+    scanf("%d", &dimensoesCaixa[0]);
+
+    printf("Digite a largura da caixa em polegadas: ");
+    scanf("%d", &dimensoesCaixa[1]);
+
+    printf("Digite a altura da caixa em polegadas: ");
+    scanf("%d", &dimensoesCaixa[2]);
+
+    for (int i = 0; i < 3; i++) {
+        volumeTotal *= dimensoesCaixa[i];
+    }
+
+    pesoDimensional = (double)volumeTotal / polegadasCubicasPorLibra;
+    pesoDimensional = ceil(pesoDimensional);   //ceil é para arredondar o valor
+    printf("O peso dimensional da caixa é: %.0f libras\n", pesoDimensional);
+
+  return 0;
 }
