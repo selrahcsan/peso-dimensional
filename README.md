@@ -17,7 +17,27 @@ O volume da caixa é calculado multiplicando o comprimento, a largura e a altura
 ### 📑 Clone o repositório: 
 
 ```bash
-git clone https://github.com/seu-nome-de-usuario/nome-do-repositorio.git
+https://github.com/selrahcsan/peso-dimensional.git
+```
+
+### 📁 Acesse o diretório: 
+
+```bash
+cd cd peso-dimensional/src/
+```
+
+### ⚙️ Compile o Código
+
+```bash
+gcc main.c -o calculo_peso_dimensional -lm
+```
+
+Certifique-se de ter o compilador GCC instalado em seu sistema. A flag -lm é necessária para linkar a biblioteca matemática, que contém a função ceil.
+
+### 🏃🏽‍➡️ Execute o programa:
+
+```bash
+./calculo_peso_dimensional
 ```
 
 ### ⚙️ Compile o Código
