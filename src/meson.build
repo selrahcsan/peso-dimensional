@@ -8,6 +8,7 @@ pesodimensinal_deps = [
 
 executable('pesodimensinal', pesodimensinal_sources,
   dependencies: pesodimensinal_deps,
+  link_args : '-lm',
   install: true,
 )
 
